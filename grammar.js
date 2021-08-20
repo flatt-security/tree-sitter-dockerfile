@@ -213,25 +213,25 @@ module.exports = grammar({
 
     image_name: ($) => repeat1(choice(/[^@:\s\$]+/, $.expansion)),
 
-    image_tag: ($) =>
-      seq(
-        token.immediate(":"),
-        repeat1(choice(token.immediate(/[^@\s\$]+/), $.expansion))
-      ),
+    image_tag: ($) => seq(token.immediate(":"), $.image_tag_value),
 
-    image_digest: ($) =>
-      seq(
-        token.immediate("@"),
-        repeat1(choice(token.immediate(/[a-zA-Z0-9:]+/), $.expansion))
-      ),
+    image_tag_value: ($) =>
+      repeat1(choice(token.immediate(/[^@\s\$]+/), $.expansion)),
+
+    image_digest: ($) => seq(token.immediate("@"), $.image_digest_value),
+    image_digest_value: ($) =>
+      repeat1(choice(token.immediate(/[a-zA-Z0-9:]+/), $.expansion)),
 
     param: ($) =>
       seq(
         "--",
-        field("name", token.immediate(/[a-z][-a-z]*/)),
+        field("name", $.param_name),
         token.immediate("="),
-        field("value", token.immediate(/[^\s]+/))
+        field("value", $.param_value)
       ),
+
+    param_name: ($) => token.immediate(/[a-z][-a-z]*/),
+    param_value: ($) => token.immediate(/[^\s]+/),
 
     image_alias: ($) => repeat1(choice(/[-a-zA-Z0-9_]+/, $.expansion)),
 

@@ -287,6 +287,21 @@
     "named": true,
     "fields": {},
     "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "image_digest_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "image_digest_value",
+    "named": true,
+    "fields": {},
+    "children": {
       "multiple": true,
       "required": false,
       "types": [
@@ -350,6 +365,21 @@
   },
   {
     "type": "image_tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "image_tag_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "image_tag_value",
     "named": true,
     "fields": {},
     "children": {
@@ -503,7 +533,28 @@
   {
     "type": "param",
     "named": true,
-    "fields": {}
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "param_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "param_value",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "path",
@@ -924,6 +975,14 @@
   },
   {
     "type": "line_continuation",
+    "named": true
+  },
+  {
+    "type": "param_name",
+    "named": true
+  },
+  {
+    "type": "param_value",
     "named": true
   },
   {
